@@ -2590,6 +2590,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 955617f1432074d4fba0cca4a7bd31ea, type: 3}
   - {fileID: 21300000, guid: b7c7faefe497437409c4cf2ec5bc611e, type: 3}
   levelStatus: {fileID: 408685792}
+  levelNumber: {fileID: 0}
 --- !u!4 &1131985699
 Transform:
   m_ObjectHideFlags: 0
@@ -2888,6 +2889,7 @@ MonoBehaviour:
   maxArrows: 3
   totalEnemies: 1
   maxTimeInSeconds: 30
+  levelNumber: 1
   arrowsLeft: 0
   arrowsInAir: 0
   currentEnemies: 0

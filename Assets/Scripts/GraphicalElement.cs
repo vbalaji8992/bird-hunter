@@ -38,6 +38,7 @@ namespace Assets.Scripts
         public GameObject levelScore;
         public Sprite[] levelScoreImage;
         public TMP_Text levelStatus;
+        public TMP_Text levelNumber;
 
         private GameControl gameControl;
 
@@ -91,6 +92,8 @@ namespace Assets.Scripts
         {
             powerMeter.text = (percentagePower * 100).ToString("00");
             powerBar.fillAmount = percentagePower;
+            powerBar.transform.position = trajectoryPoints[0].transform.position + new Vector3(-1.15f, 1.25f, 0f);
+            powerMeter.transform.position = powerBar.transform.position + new Vector3(powerBar.GetComponent<RectTransform>().rect.width * powerBar.transform.localScale.x * powerBar.fillAmount, 0f, 0f);
 
             angleText.text = launchAngle.ToString("00") + "°";
             angleText.transform.position = trajectoryPoints[3].transform.position + new Vector3(0.75f, 0.75f, 0f);

@@ -47,7 +47,7 @@ public class ArcherControl : MonoBehaviour
     void Start()
     {       
 
-        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 6, Screen.height / 4, 10));
+        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(75, Screen.height / 2f, 10));
 
         archerTopPos = archerTop.transform.position;
 

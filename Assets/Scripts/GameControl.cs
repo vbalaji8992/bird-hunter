@@ -15,6 +15,7 @@ public class GameControl : MonoBehaviour
     public int maxArrows;
     public int totalEnemies;
     public float maxTimeInSeconds;
+    public int levelNumber;
 
     private GraphicalElement graphicalElement;
 
@@ -65,6 +66,7 @@ public class GameControl : MonoBehaviour
         graphicalElement.UpdateArrowCountImage(arrowsLeft);
         currentEnemies = totalEnemies;
         arrowsInAir = 0;
+        graphicalElement.levelNumber.text = "LEVEL " + levelNumber.ToString("00");
     }
 
     // Update is called once per frame
