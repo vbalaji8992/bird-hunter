@@ -37,7 +37,7 @@ public class Arrow : MonoBehaviour
     {
         GetComponent<Rigidbody2D>().AddForce(force);
 
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), ArcherControl.Instance.GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), InputControl.Instance.GetComponent<Collider2D>());
     }
 
     private void UpdateRotation()

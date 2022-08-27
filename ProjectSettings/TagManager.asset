@@ -50,3 +50,6 @@ TagManager:
   - name: SL3
     uniqueID: 4148402177
     locked: 0
+  - name: SL4
+    uniqueID: 1161482107
+    locked: 0

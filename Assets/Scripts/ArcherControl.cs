@@ -12,10 +12,7 @@ public class ArcherControl : MonoBehaviour
     public GameObject archerTop;
     public GameObject arrow;    
 
-    private bool isMouseDown;
-
     private Vector2 archerTopPos;
-    private Vector2 mouseCurrentPos;
     private float mouseCurrentDist;
 
     public float forceConstant;
@@ -27,6 +24,7 @@ public class ArcherControl : MonoBehaviour
 
     private GraphicalElement graphicalElement;
     private GameControl gameControl;
+    private InputControl inputControl;
 
     void Awake()
     {      
@@ -55,10 +53,10 @@ public class ArcherControl : MonoBehaviour
 
         graphicalElement = GraphicalElement.Instance;
         gameControl = GameControl.Instance;
+        inputControl = InputControl.Instance;
 
         graphicalElement.GenerateTrajectory(archerTopPos);     
-        graphicalElement.TogglePowerAndAngleMeter(false);        
-
+        graphicalElement.TogglePowerAndAngleMeter(false);
     }
 
 
@@ -66,7 +64,7 @@ public class ArcherControl : MonoBehaviour
     void Update()
     {        
 
-        if (isMouseDown)
+        if (InputControl.Instance.IsMouseDown)
         {
             float inputAngle = CalculateInputAngle();
 
@@ -90,10 +88,11 @@ public class ArcherControl : MonoBehaviour
 
     private void CalculateLaunchForce()
     {
-        mouseCurrentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouseCurrentDist = Vector2.Distance(transform.position, mouseCurrentPos);
+        if (inputControl.MouseCurrentPosition.x < inputControl.MouseDownPosition.x)
+        {
+            mouseCurrentDist = Vector2.Distance(inputControl.MouseDownPosition, inputControl.MouseCurrentPosition);
+        }        
 
-        //Debug.Log(mouseCurrentDist);
         launchForce = forceConstant * mouseCurrentDist;
 
         if (launchForce > maxForce)
@@ -122,36 +121,11 @@ public class ArcherControl : MonoBehaviour
 
     private float CalculateInputAngle()
     {
-        Vector2 inputVector = (mouseCurrentPos - archerTopPos).normalized;
+        Vector2 inputVector = (inputControl.MouseCurrentPosition - inputControl.MouseDownPosition).normalized;
         float inputAngle = Mathf.Atan2(inputVector.y, inputVector.x);
         inputAngle = (inputAngle < 0f) ? (inputAngle + 2f * Mathf.PI) * Mathf.Rad2Deg : inputAngle * Mathf.Rad2Deg;
         return inputAngle;
-    }
-
-    void OnMouseDown()
-    {
-        if (gameControl.arrowsLeft > 0 && gameControl.acceptPlayerInput)
-        {
-            SetMouseDown(true);
-        }
     }    
-
-    void OnMouseUp()
-    {  
-        if (gameControl.arrowsLeft > 0 && gameControl.acceptPlayerInput)
-        {
-            CreateArrow();
-        }
-
-        SetMouseDown(false);
-    }
-
-    private void SetMouseDown(bool state)
-    {
-        isMouseDown = state;
-        graphicalElement.trajectoryGroup.SetActive(state);
-        graphicalElement.TogglePowerAndAngleMeter(state);
-    }
 
     public void CreateArrow()
     {
