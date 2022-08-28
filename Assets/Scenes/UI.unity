@@ -3943,7 +3943,7 @@ MonoBehaviour:
   trajectoryPoint: {fileID: 5849429613491041657, guid: e82ed3c26ac2884478b9932d26e97814,
     type: 3}
   numberOfPoints: 5
-  spaceBetweenPoints: 0.05
+  spaceBetweenPoints: 0.025
   trajectoryGroup: {fileID: 1787382354}
   arrowIndicator: {fileID: 1988545236}
   arrowImage: {fileID: 4123195498999543706, guid: 556884d26349b3746b4ad082f542e68a,
