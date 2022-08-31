@@ -40,11 +40,14 @@ namespace Assets.Scripts
         public TMP_Text levelStatus;
         public TMP_Text levelNumber;
 
+        public Image hand;
+        public float handAnimationTime;
+        private Animator handAnimator;
+
         private GameControl gameControl;
 
         void Awake()
         {
-
             if (Instance == null)
             {
                 Instance = this;
@@ -59,13 +62,27 @@ namespace Assets.Scripts
         void Start()
         {
             gameControl = GameControl.Instance;
+
+            handAnimator = hand.GetComponent<Animator>();
+
+            if (gameControl.levelNumber < 2)
+            {
+                handAnimator.SetTrigger("Start");
+            }
         }
 
         void Update()
         {
-            //arrowsLeft.text = GameControl.Instance.arrowsLeft.ToString();
-
             levelTimer.text = TimeSpan.FromSeconds(GameControl.Instance.timeLeft).ToString(@"mm\:ss");
+
+            if (handAnimationTime <= 0)
+            {
+                handAnimator.SetTrigger("Stop");
+            }
+            else
+            {
+                handAnimationTime -= Time.deltaTime;
+            }
         }
 
         public void GenerateTrajectory(Vector2 startingPosition)
