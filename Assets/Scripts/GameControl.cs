@@ -15,9 +15,10 @@ public class GameControl : MonoBehaviour
     public int maxArrows;
     public int totalEnemies;
     public float maxTimeInSeconds;
-    public int levelNumber;
+    public uint levelNumber;
 
     private GraphicalElement graphicalElement;
+    private SaveGame saveGame;
 
     [HideInInspector]
     public int arrowsLeft;
@@ -28,7 +29,7 @@ public class GameControl : MonoBehaviour
     [HideInInspector]
     public int currentEnemies;
 
-    private int score;
+    private uint score;
 
     [HideInInspector]
     public bool acceptPlayerInput;
@@ -61,6 +62,7 @@ public class GameControl : MonoBehaviour
     void Start()
     {
         graphicalElement = GraphicalElement.Instance;
+        saveGame = SaveGame.Instance;
 
         arrowsLeft = maxArrows;
         graphicalElement.UpdateArrowCountImage(arrowsLeft);
@@ -138,14 +140,15 @@ public class GameControl : MonoBehaviour
 
         if(currentEnemies == 0)
         {
-            score = (int)Math.Ceiling(totalPoints / 0.33);
+            score = (uint)Math.Ceiling(totalPoints / 0.33);
         }
         else
         {
             score = 0;
         }
 
-       graphicalElement.SetLevelScoreAndStatus(score);
-        
+        graphicalElement.SetLevelScoreAndStatus(score);
+        saveGame.UpdateLevelScore(levelNumber, score);
+        saveGame.SaveData();
     }
 }

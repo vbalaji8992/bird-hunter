@@ -45,6 +45,7 @@ namespace Assets.Scripts
         private Animator handAnimator;
 
         private GameControl gameControl;
+        private SaveGame saveGame;
 
         void Awake()
         {
@@ -62,12 +63,15 @@ namespace Assets.Scripts
         void Start()
         {
             gameControl = GameControl.Instance;
+            saveGame = SaveGame.Instance;
 
             handAnimator = hand.GetComponent<Animator>();
 
-            if (gameControl.levelNumber < 2)
+            if (saveGame.CurrentData.showHand == true)
             {
                 handAnimator.SetTrigger("Start");
+                saveGame.CurrentData.showHand = false;
+                saveGame.SaveData();
             }
         }
 
@@ -131,13 +135,6 @@ namespace Assets.Scripts
 
         public void UpdateArrowCountImage(int count)
         {
-            //int childCount = arrowIndicator.transform.childCount;
-
-            //if (childCount > 0)
-            //{
-            //    Destroy(arrowIndicator.transform.GetChild(childCount-1).gameObject);
-            //}
-            //
             const int transparent = 0;
             const int opaque = 255;
 
@@ -153,7 +150,7 @@ namespace Assets.Scripts
             
         }
 
-        public void SetLevelScoreAndStatus(int score)
+        public void SetLevelScoreAndStatus(uint score)
         {
             levelScore.GetComponent<Image>().sprite = levelScoreImage[score];
 
