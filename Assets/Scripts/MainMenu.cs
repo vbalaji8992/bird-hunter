@@ -17,13 +17,6 @@ public class MainMenu : MonoBehaviour
         
     }
 
-    public void PlayLevelOne()
-    {
-        SceneManager.LoadScene("LevelOne");
-        SceneManager.LoadScene("Player", LoadSceneMode.Additive);
-        SceneManager.LoadScene("UI", LoadSceneMode.Additive);
-    }
-
     public void QuitGame()
     {
         Application.Quit();
