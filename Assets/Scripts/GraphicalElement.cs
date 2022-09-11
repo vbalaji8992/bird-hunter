@@ -25,8 +25,7 @@ namespace Assets.Scripts
         public GameObject pauseButton;
         public GameObject pauseMenu;
         public GameObject scoreBoard;
-
-        //public TMP_Text arrowsLeft;
+        
         public TMP_Text powerMeter;
         public Image powerBar;
         public TMP_Text angleText;
@@ -86,6 +85,19 @@ namespace Assets.Scripts
             else
             {
                 handAnimationTime -= Time.deltaTime;
+            }
+        }
+
+        public void GenerateArrowCount(int count)
+        {
+            int offset = -40;
+
+            for (int i = 0; i < count; i++)
+            {
+                var arrow = Instantiate(arrowImage);
+                arrow.transform.SetParent(arrowIndicator.transform, false);
+                arrow.transform.localPosition = new Vector3((float)offset, 0, 0);
+                offset += 30;
             }
         }
 
@@ -202,6 +214,11 @@ namespace Assets.Scripts
         public void ReloadLevel()
         {
             gameControl.ReloadLevel();
+        }
+
+        public void LoadNextLevel()
+        {
+            gameControl.LoadNextLevel();
         }
 
     }

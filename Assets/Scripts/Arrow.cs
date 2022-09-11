@@ -60,11 +60,11 @@ public class Arrow : MonoBehaviour
             rotationOffset = transform.rotation;
             collisionObject = collision.gameObject;
         }
-        else
-        {
-            //transform.parent = collision.transform;
-        }
 
+        if (collision.gameObject.name.Contains("Plank"))
+        {
+            
+        }
     }
 
     private void DestroyComponents()

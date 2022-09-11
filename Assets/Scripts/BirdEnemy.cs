@@ -47,11 +47,6 @@ public class BirdEnemy : MonoBehaviour
             CalculateCurrentAngle();
 
             Move();
-
-            //Vector2 offset = new Vector2(Mathf.Cos(currentAngle) * radiusX, Mathf.Sin(movementDirection * currentAngle) * radiusY);
-            //transform.position = initialPosition + offset;
-
-
         }
     }
 
@@ -73,7 +68,7 @@ public class BirdEnemy : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {       
 
-        if (collision.gameObject.name.Contains("Arrow"))
+        if (collision.gameObject.name.Contains("Arrow") && !isDead)
         {
             GameControl.Instance.currentEnemies -= 1;
             isDead = true;

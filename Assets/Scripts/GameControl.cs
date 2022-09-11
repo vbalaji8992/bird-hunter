@@ -65,6 +65,7 @@ public class GameControl : MonoBehaviour
         saveGame = SaveGame.Instance;
 
         arrowsLeft = maxArrows;
+        graphicalElement.GenerateArrowCount(arrowsLeft);
         graphicalElement.UpdateArrowCountImage(arrowsLeft);
         currentEnemies = totalEnemies;
         arrowsInAir = 0;
@@ -128,7 +129,18 @@ public class GameControl : MonoBehaviour
         SceneManager.LoadScene("UI", LoadSceneMode.Additive);
     }
 
-    
+    public void LoadNextLevel()
+    {
+        string sceneToLoad = "Level" + (levelNumber + 1).ToString("00");
+        var sceneIndexToLoad = SceneUtility.GetBuildIndexByScenePath($"Scenes/{sceneToLoad}");
+
+        if (sceneIndexToLoad >= 0)
+        {
+            SceneManager.LoadScene(sceneIndexToLoad);
+            SceneManager.LoadScene("Player", LoadSceneMode.Additive);
+            SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+        }
+    }
 
     void CalculateScore()
     {

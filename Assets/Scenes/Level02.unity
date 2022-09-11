@@ -188,6 +188,16 @@ PrefabInstance:
       propertyPath: levelNumber
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7316735258068623641, guid: 3fcc77b85ca65d44e9f9c2416b5f6469,
+        type: 3}
+      propertyPath: maxArrows
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316735258068623641, guid: 3fcc77b85ca65d44e9f9c2416b5f6469,
+        type: 3}
+      propertyPath: maxTimeInSeconds
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 7316735258068623646, guid: 3fcc77b85ca65d44e9f9c2416b5f6469,
         type: 3}
       propertyPath: m_Name
