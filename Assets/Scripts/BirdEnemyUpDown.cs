@@ -7,13 +7,11 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    class BirdEnemyUpDown : BirdEnemy
-    {       
-
+    class BirdEnemyUpDown : BirdEnemyCircle
+    {
         protected override void Move()
         {
-            Vector2 offset = new Vector2(0, Mathf.Sin(currentAngle) * radiusY);
-            transform.position = initialPosition + offset;
+            
         }
     }
 }

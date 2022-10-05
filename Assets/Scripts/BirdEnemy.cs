@@ -11,12 +11,10 @@ public class BirdEnemy : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
 
     protected bool isDead;
-    protected float currentAngle;
     protected Vector2 initialPosition;
+    protected Vector2 previousPosition;
 
-    public float movementSpeed;    
-    public float radiusX;
-    public float radiusY;    
+    public float movementSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +29,7 @@ public class BirdEnemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         initialPosition = transform.position;
+        previousPosition = initialPosition;
         isDead = false;
     }
 
@@ -38,36 +37,35 @@ public class BirdEnemy : MonoBehaviour
     void FixedUpdate()
     {
         UpdatePosition();
+
+        CheckDirectionAndFlipSprite();
     }
 
     protected void UpdatePosition()
     {
         if (!isDead)
         {
-            CalculateCurrentAngle();
-
             Move();
-        }
-    }
-
-    protected void CalculateCurrentAngle()
-    {
-        currentAngle += movementSpeed * Time.deltaTime;
-
-        if (currentAngle >= twoPiRadians)
-        {
-            currentAngle -= twoPiRadians;
         }
     }
 
     protected virtual void Move()
     {
+       
+    }
 
+    private void CheckDirectionAndFlipSprite()
+    {
+        if (transform.position.x > previousPosition.x)
+            spriteRenderer.flipX = true;
+        else
+            spriteRenderer.flipX = false;
+
+        previousPosition = transform.position;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
-    {       
-
+    {
         if (collision.gameObject.name.Contains("Arrow") && !isDead)
         {
             GameControl.Instance.currentEnemies -= 1;

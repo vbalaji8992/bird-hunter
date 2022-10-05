@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8951049288466140245}
   - component: {fileID: -3284568355301741287}
   - component: {fileID: -460632795992807069}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BirdEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
