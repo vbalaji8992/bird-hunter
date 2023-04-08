@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class BirdEnemy : MonoBehaviour
 {
@@ -16,10 +17,16 @@ public class BirdEnemy : MonoBehaviour
 
     public float movementSpeed;
 
+    private GameObject[] positions;
+    private int currentPosIndex;
+
     // Start is called before the first frame update
     void Start()
     {
         InitializeObject();
+
+        positions =  GameObject.FindGameObjectsWithTag("BirdPosition");
+        currentPosIndex = 0;
     }
 
     protected void InitializeObject()
@@ -36,22 +43,30 @@ public class BirdEnemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        UpdatePosition();
-
-        CheckDirectionAndFlipSprite();
-    }
-
-    protected void UpdatePosition()
-    {
         if (!isDead)
         {
             Move();
-        }
+            CheckDirectionAndFlipSprite();
+        }               
     }
 
     protected virtual void Move()
     {
-       
+        if (positions.Length == 0)
+            return;
+
+        var target = positions[currentPosIndex].transform.position;
+        var diff = (Vector2)(target - transform.position);
+        if (diff.magnitude > 1.05)
+        {
+            rb2d.MovePosition((Vector2)transform.position + diff.normalized * Time.deltaTime * movementSpeed);
+        }
+        else 
+        {
+            currentPosIndex += 1;
+            if (currentPosIndex == positions.Length)
+                currentPosIndex = 0;           
+        }
     }
 
     private void CheckDirectionAndFlipSprite()
@@ -72,6 +87,6 @@ public class BirdEnemy : MonoBehaviour
             isDead = true;
             anim.SetTrigger("BirdDead");
             rb2d.gravityScale = 1.0f;
-        }       
+        }
     }
 }
