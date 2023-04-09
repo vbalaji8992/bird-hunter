@@ -25,7 +25,7 @@ public class Arrow : MonoBehaviour
         {
             UpdateRotation();
         }
-
+        
         if (collisionObject != null)
         {
             transform.position = collisionObject.transform.position;
@@ -36,8 +36,6 @@ public class Arrow : MonoBehaviour
     public void Fire(Vector2 force)
     {
         GetComponent<Rigidbody2D>().AddForce(force);
-
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), InputControl.Instance.GetComponent<Collider2D>());
     }
 
     private void UpdateRotation()
@@ -49,22 +47,20 @@ public class Arrow : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        GameControl.Instance.arrowsInAir -= 1;
-
-        DestroyComponents();
-
-        islodged = true;
+        DestroyArrow();
 
         if (collision.gameObject.name.Contains("BirdEnemy"))
         {
             rotationOffset = transform.rotation;
             collisionObject = collision.gameObject;
         }
+    }
 
-        if (collision.gameObject.name.Contains("Plank"))
-        {
-            
-        }
+    public void DestroyArrow()
+    {
+        GameControl.Instance.arrowsInAir -= 1;
+        DestroyComponents();
+        islodged = true;
     }
 
     private void DestroyComponents()
@@ -72,5 +68,10 @@ public class Arrow : MonoBehaviour
         Destroy(GetComponent<TrailRenderer>());
         Destroy(GetComponent<Collider2D>());
         Destroy(rb2d);
+    }
+
+    public void Deflect(float x, float y)
+    {
+        rb2d.velocity = new Vector2(x * rb2d.velocity.x, y * rb2d.velocity.y);        
     }
 }

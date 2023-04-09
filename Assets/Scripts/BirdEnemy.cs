@@ -88,5 +88,10 @@ public class BirdEnemy : MonoBehaviour
             anim.SetTrigger("BirdDead");
             rb2d.gravityScale = 1.0f;
         }
+
+        if (collision.gameObject.name.Contains("Grass") && isDead)
+        {
+            GameControl.Instance.enemiesOnGround += 1;
+        }
     }
 }

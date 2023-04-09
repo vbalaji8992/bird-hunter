@@ -29,6 +29,9 @@ public class GameControl : MonoBehaviour
     [HideInInspector]
     public int currentEnemies;
 
+    [HideInInspector]
+    public int enemiesOnGround;
+
     private uint score;
 
     [HideInInspector]
@@ -68,6 +71,7 @@ public class GameControl : MonoBehaviour
         graphicalElement.GenerateArrowCount(arrowsLeft);
         graphicalElement.UpdateArrowCountImage(arrowsLeft);
         currentEnemies = totalEnemies;
+        enemiesOnGround = 0;
         arrowsInAir = 0;
         graphicalElement.levelNumber.text = "LEVEL " + levelNumber.ToString("00");
     }
@@ -76,18 +80,18 @@ public class GameControl : MonoBehaviour
     void Update()
     {
         if (!isLevelOver)
-        {
             timeLeft -= Time.deltaTime;
-        }
 
         bool isTimeOver = timeLeft <= 0;
         bool isNoArrowLeft = arrowsLeft == 0 && arrowsInAir == 0;
         bool isNoEnemyLeft = currentEnemies == 0;
+        bool allEnemiesOnGround = enemiesOnGround == totalEnemies;
 
         if (!isLevelOver && (isTimeOver || isNoArrowLeft || isNoEnemyLeft))
-        {
             EndLevel();
-        }
+
+        if (isLevelOver && (isTimeOver || isNoArrowLeft || allEnemiesOnGround))
+            graphicalElement.DisplayScoreBoard();
     }
 
     public void UpdateArrowCountOnFire()
@@ -101,8 +105,7 @@ public class GameControl : MonoBehaviour
     {
         isLevelOver = true;
         acceptPlayerInput = false;
-        CalculateScore();
-        graphicalElement.DisplayScoreBoard();
+        CalculateScore();        
     }
 
     public void PauseGame()
