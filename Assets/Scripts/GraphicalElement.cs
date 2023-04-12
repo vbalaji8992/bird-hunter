@@ -25,7 +25,8 @@ namespace Assets.Scripts
         public GameObject pauseButton;
         public GameObject pauseMenu;
         public GameObject scoreBoard;
-        
+        public GameObject cancelShotButton;
+
         public TMP_Text powerMeter;
         public Image powerBar;
         public TMP_Text angleText;
@@ -221,5 +222,9 @@ namespace Assets.Scripts
             gameControl.LoadNextLevel();
         }
 
+        public void CancelShot()
+        {
+            InputControl.Instance.CancelShot();
+        }
     }
 }

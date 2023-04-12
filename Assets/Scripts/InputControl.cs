@@ -14,6 +14,8 @@ public class InputControl : MonoBehaviour
     private GraphicalElement graphicalElement;
     private GameControl gameControl;
 
+    private bool isShotCancelled;
+
     void Awake()
     {
 
@@ -35,6 +37,8 @@ public class InputControl : MonoBehaviour
 
         graphicalElement = GraphicalElement.Instance;
         gameControl = GameControl.Instance;
+
+        isShotCancelled = false;
     }
 
     // Update is called once per frame
@@ -43,11 +47,17 @@ public class InputControl : MonoBehaviour
         if (IsMouseDown)
         {
             MouseCurrentPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);            
-        }        
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+            CancelShot();         
     }
 
     void OnMouseDown()
     {
+        isShotCancelled = false;
+        graphicalElement.cancelShotButton.SetActive(true);
+
         MouseDownPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (gameControl.arrowsLeft > 0 && gameControl.acceptPlayerInput)
@@ -58,18 +68,29 @@ public class InputControl : MonoBehaviour
 
     void OnMouseUp()
     {
+        if (isShotCancelled)
+            return;
+
         if (gameControl.arrowsLeft > 0 && gameControl.acceptPlayerInput)
         {
             ArcherControl.Instance.CreateArrow();
         }
 
+        graphicalElement.cancelShotButton.SetActive(false);
         SetMouseDown(false);
     }
 
-    private void SetMouseDown(bool state)
+    void SetMouseDown(bool state)
     {
         IsMouseDown = state;
         graphicalElement.trajectoryGroup.SetActive(state);
         graphicalElement.TogglePowerAndAngleMeter(state);
+    }
+
+    public void CancelShot()
+    {
+        SetMouseDown(false);
+        graphicalElement.cancelShotButton.SetActive(false);
+        isShotCancelled = true;
     }
 }
