@@ -45,39 +45,33 @@ public class InputControl : MonoBehaviour
     void Update()
     {        
         if (IsMouseDown)
-        {
             MouseCurrentPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);            
-        }
 
         if (Input.GetKeyUp(KeyCode.Space))
             CancelShot();         
     }
 
     void OnMouseDown()
-    {
-        isShotCancelled = false;
-        graphicalElement.cancelShotButton.SetActive(true);
-
+    { 
         MouseDownPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (gameControl.arrowsLeft > 0 && gameControl.acceptPlayerInput)
-        {
-            SetMouseDown(true);
-        }
+            SetMouseDown(true);                     
     }
 
     void OnMouseUp()
     {
         if (isShotCancelled)
-            return;
-
-        if (gameControl.arrowsLeft > 0 && gameControl.acceptPlayerInput)
         {
-            ArcherControl.Instance.CreateArrow();
+            isShotCancelled = false;
+            return;
         }
 
-        graphicalElement.cancelShotButton.SetActive(false);
+        if (gameControl.arrowsLeft > 0 && gameControl.acceptPlayerInput)
+            ArcherControl.Instance.CreateArrow();
+
         SetMouseDown(false);
+        
     }
 
     void SetMouseDown(bool state)
@@ -85,12 +79,12 @@ public class InputControl : MonoBehaviour
         IsMouseDown = state;
         graphicalElement.trajectoryGroup.SetActive(state);
         graphicalElement.TogglePowerAndAngleMeter(state);
+        graphicalElement.cancelShotButton.SetActive(state);
     }
 
     public void CancelShot()
     {
         SetMouseDown(false);
-        graphicalElement.cancelShotButton.SetActive(false);
         isShotCancelled = true;
     }
 }

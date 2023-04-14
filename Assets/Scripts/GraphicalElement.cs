@@ -27,6 +27,9 @@ namespace Assets.Scripts
         public GameObject scoreBoard;
         public GameObject cancelShotButton;
 
+        public GameObject helpButton;
+        public GameObject helpBoard;
+
         public TMP_Text powerMeter;
         public Image powerBar;
         public TMP_Text angleText;
@@ -187,12 +190,14 @@ namespace Assets.Scripts
         {
             pauseMenu.SetActive(state);
             pauseButton.SetActive(!state);
+            helpButton.SetActive(!state);
         }
 
         public void DisplayScoreBoard()
         {
             scoreBoard.SetActive(true);
             pauseButton.SetActive(false);
+            helpButton.SetActive(false);
         }
 
         public void PauseGame()
@@ -225,6 +230,25 @@ namespace Assets.Scripts
         public void CancelShot()
         {
             InputControl.Instance.CancelShot();
+        }
+
+        public void OpenHelp()
+        {
+            gameControl.PauseGame();
+            ToggleHelpBoard(true);
+        }
+
+        public void CloseHelp() 
+        {
+            ToggleHelpBoard(false);
+            gameControl.ResumeGame();            
+        }
+
+        private void ToggleHelpBoard(bool state)
+        {
+            helpBoard.SetActive(state);
+            helpButton.SetActive(!state);
+            pauseButton.SetActive(!state);
         }
     }
 }
