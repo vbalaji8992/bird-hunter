@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -460632795992807069}
   m_Layer: 9
   m_Name: BirdEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,9 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935486181e3d2a24aa1a1664807344ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0
-  radiusX: 0
-  radiusY: 0
+  movementSpeed: 2
 --- !u!50 &-3284568355301741287
 Rigidbody2D:
   serializedVersion: 4

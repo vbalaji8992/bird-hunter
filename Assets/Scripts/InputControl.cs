@@ -47,7 +47,7 @@ public class InputControl : MonoBehaviour
         if (IsMouseDown)
             MouseCurrentPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);            
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (IsMouseDown && Input.GetKeyUp(KeyCode.Space))
             CancelShot();         
     }
 

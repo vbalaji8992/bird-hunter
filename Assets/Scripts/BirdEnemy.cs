@@ -11,12 +11,13 @@ public class BirdEnemy : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
 
     protected bool isDead;
+    protected bool isOnGround;
     protected Vector2 initialPosition;
     protected Vector2 previousPosition;
 
     public float movementSpeed;
 
-    private GameObject[] positions;
+    private List<Vector3> positions;
     private int currentPosIndex;
 
     // Start is called before the first frame update
@@ -24,7 +25,12 @@ public class BirdEnemy : MonoBehaviour
     {
         InitializeObject();
 
-        positions =  GameObject.FindGameObjectsWithTag("BirdPosition");
+        positions = new List<Vector3>();
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.tag == "BirdPosition")
+                positions.Add(child.gameObject.transform.position);
+        }
         currentPosIndex = 0;
     }
 
@@ -37,6 +43,7 @@ public class BirdEnemy : MonoBehaviour
         initialPosition = transform.position;
         previousPosition = initialPosition;
         isDead = false;
+        isOnGround = false;
     }
 
     // Update is called once per frame
@@ -51,10 +58,10 @@ public class BirdEnemy : MonoBehaviour
 
     protected virtual void Move()
     {
-        if (positions.Length == 0)
+        if (positions.Count == 0)
             return;
 
-        var target = positions[currentPosIndex].transform.position;
+        var target = positions[currentPosIndex];
         var diff = (Vector2)(target - transform.position);
         if (diff.magnitude > 1.05)
         {
@@ -63,8 +70,8 @@ public class BirdEnemy : MonoBehaviour
         else 
         {
             currentPosIndex += 1;
-            if (currentPosIndex == positions.Length)
-                currentPosIndex = 0;           
+            if (currentPosIndex == positions.Count)
+                currentPosIndex = 0;
         }
     }
 
@@ -80,7 +87,7 @@ public class BirdEnemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Contains("Arrow") && !isDead)
+        if (collision.gameObject.tag == "Arrow" && !isDead)
         {
             GameControl.Instance.currentEnemies -= 1;
             isDead = true;
@@ -88,9 +95,10 @@ public class BirdEnemy : MonoBehaviour
             rb2d.gravityScale = 1.0f;
         }
 
-        if (collision.gameObject.name.Contains("Grass") && isDead)
+        if (collision.gameObject.tag != "Arrow" && isDead && !isOnGround)
         {
-            GameControl.Instance.enemiesOnGround += 1;
+            isOnGround = true;
+            GameControl.Instance.enemiesOnGround += 1;            
         }
     }
 }

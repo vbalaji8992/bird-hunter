@@ -49,7 +49,7 @@ public class Arrow : MonoBehaviour
     {
         DestroyArrow();
 
-        if (collision.gameObject.name.Contains("BirdEnemy"))
+        if (collision.gameObject.tag == "Enemy")
         {
             rotationOffset = transform.rotation;
             collisionObject = collision.gameObject;

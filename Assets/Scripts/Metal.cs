@@ -18,7 +18,7 @@ public class Metal : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (!col.gameObject.name.Contains("Arrow"))
+        if (col.gameObject.tag != "Arrow")
             return;
 
         var width = GetComponent<SpriteRenderer>().bounds.size.x;

@@ -110,7 +110,12 @@ PrefabInstance:
     - target: {fileID: 6924028242795653476, guid: 35cb5ab7529f9f842b350c3f8fbcc4ec,
         type: 3}
       propertyPath: m_Name
-      value: BirdEnemy-UpDown
+      value: BirdEnemy-Circle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6924028242795653476, guid: 35cb5ab7529f9f842b350c3f8fbcc4ec,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8951049288466140245, guid: 35cb5ab7529f9f842b350c3f8fbcc4ec, type: 3}
