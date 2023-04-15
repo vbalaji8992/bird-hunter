@@ -34,7 +34,7 @@ public class LevelButton : MonoBehaviour
 
     void LoadLevel()
     {
-        string levelscene = "Level" + levelNumber.ToString("00");
+        string levelscene = MainMenu.Levels[(int)levelNumber];
         SceneManager.LoadScene(levelscene);
         SceneManager.LoadScene("Player", LoadSceneMode.Additive);
         SceneManager.LoadScene("UI", LoadSceneMode.Additive);

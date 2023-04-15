@@ -5,16 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public static List<string> Levels { get; private set; } = new List<string>
+        {
+            "BirdStaticNear",
+            "BirdStaticFar",
+            "BirdMoving",
+            "BirdBehindPlank",            
+            "BirdUpDown",
+            "BirdUpDownPlank",
+            "BirdTwoMoving",
+            "BirdBetweenPlanks",
+            "BirdPlankAndMetal",
+            "BirdTwoMetals"
+        };
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void QuitGame()

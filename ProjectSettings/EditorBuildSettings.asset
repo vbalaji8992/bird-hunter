@@ -15,27 +15,30 @@ EditorBuildSettings:
     path: Assets/Scenes/UI.unity
     guid: a3a3a6f3d56744548a805edae4ff2373
   - enabled: 1
-    path: Assets/Scenes/Level01.unity
+    path: Assets/Scenes/BirdStaticFar.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Level04.unity
+    path: Assets/Scenes/BirdUpDown.unity
     guid: 3a7a6b9b457cc8f429a989eb4d97e56c
   - enabled: 1
-    path: Assets/Scenes/Level03.unity
+    path: Assets/Scenes/BirdBehindPlank.unity
     guid: be272ad22e124b14db645c5b0bf2a3f8
   - enabled: 1
-    path: Assets/Scenes/Level06.unity
+    path: Assets/Scenes/BirdTwoMoving.unity
     guid: 8cb09bd2614de014a81a73643128bf50
   - enabled: 1
-    path: Assets/Scenes/Level05.unity
+    path: Assets/Scenes/BirdUpDownPlank.unity
     guid: 298547dc682d9b64a8bb885cf2fdf90a
   - enabled: 1
-    path: Assets/Scenes/Level02.unity
+    path: Assets/Scenes/BirdMoving.unity
     guid: 6f2352199073aee4195d98e26398987f
   - enabled: 1
-    path: Assets/Scenes/Level07.unity
+    path: Assets/Scenes/BirdTwoMetals.unity
     guid: 55d4757d7671f2e479b9fc7d794f37a1
   - enabled: 1
-    path: Assets/Scenes/Level08.unity
+    path: Assets/Scenes/BirdPlankAndMetal.unity
     guid: 1495814874039f147b381fdc44830025
+  - enabled: 1
+    path: Assets/Scenes/BirdStaticNear.unity
+    guid: 01c0de7c0e857cf45962f1ea6eba49ea
   m_configObjects: {}

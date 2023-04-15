@@ -15,7 +15,7 @@ public class GameControl : MonoBehaviour
     public int maxArrows;
     public int totalEnemies;
     public float maxTimeInSeconds;
-    public uint levelNumber;
+    private uint levelNumber;
 
     private GraphicalElement graphicalElement;
     private SaveGame saveGame;
@@ -73,6 +73,8 @@ public class GameControl : MonoBehaviour
         currentEnemies = totalEnemies;
         enemiesOnGround = 0;
         arrowsInAir = 0;
+
+        levelNumber = (uint)MainMenu.Levels.IndexOf(SceneManager.GetActiveScene().name);
         graphicalElement.levelNumber.text = "LEVEL " + levelNumber.ToString("00");
     }
 
@@ -134,7 +136,10 @@ public class GameControl : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        string sceneToLoad = "Level" + (levelNumber + 1).ToString("00");
+        if (levelNumber == MainMenu.Levels.Count - 1)
+            return;
+
+        string sceneToLoad = MainMenu.Levels[(int)levelNumber + 1];
         var sceneIndexToLoad = SceneUtility.GetBuildIndexByScenePath($"Scenes/{sceneToLoad}");
 
         if (sceneIndexToLoad >= 0)
