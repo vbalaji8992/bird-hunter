@@ -26,6 +26,7 @@ namespace Assets.Scripts
         public GameObject pauseMenu;
         public GameObject scoreBoard;
         public GameObject cancelShotButton;
+        public GameObject bgmButton;
 
         public GameObject helpButton;
         public GameObject helpBoard;
@@ -49,6 +50,7 @@ namespace Assets.Scripts
 
         private GameControl gameControl;
         private SaveGame saveGame;
+        private BackgroundMusic backgroundMusic;
 
         void Awake()
         {
@@ -67,6 +69,7 @@ namespace Assets.Scripts
         {
             gameControl = GameControl.Instance;
             saveGame = SaveGame.Instance;
+            backgroundMusic = BackgroundMusic.Instance;
 
             handAnimator = hand.GetComponent<Animator>();
 
@@ -76,6 +79,8 @@ namespace Assets.Scripts
                 saveGame.CurrentData.showHand = false;
                 saveGame.SaveData();
             }
+
+            ChangeBgmButton();
         }
 
         void Update()
@@ -191,6 +196,7 @@ namespace Assets.Scripts
             pauseMenu.SetActive(state);
             pauseButton.SetActive(!state);
             helpButton.SetActive(!state);
+            //bgmButton.SetActive(!state);
         }
 
         public void DisplayScoreBoard()
@@ -198,6 +204,7 @@ namespace Assets.Scripts
             scoreBoard.SetActive(true);
             pauseButton.SetActive(false);
             helpButton.SetActive(false);
+            //bgmButton.SetActive(false);
         }
 
         public void PauseGame()
@@ -249,6 +256,22 @@ namespace Assets.Scripts
             helpBoard.SetActive(state);
             helpButton.SetActive(!state);
             pauseButton.SetActive(!state);
+            //bgmButton.SetActive(!state);
+        }
+
+        public void ToggleBGM()
+        {
+            backgroundMusic.ToggleMute();
+            ChangeBgmButton();
+        }
+
+        private void ChangeBgmButton()
+        {
+            var bgmOffImage = bgmButton.transform.GetChild(1).gameObject;
+            if (backgroundMusic.AudioSource.mute)
+                bgmOffImage.SetActive(true);
+            else
+                bgmOffImage.SetActive(false);
         }
     }
 }

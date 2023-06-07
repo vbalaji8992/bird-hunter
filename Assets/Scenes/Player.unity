@@ -432,7 +432,7 @@ MonoBehaviour:
   archerTop: {fileID: 649587267}
   arrow: {fileID: 2835060907292760550, guid: 8b8a80c1300c0174ab5f3e06136cff72, type: 3}
   forceConstant: 350
-  maxForce: 1000
+  maxForce: 900
 --- !u!212 &1769647834
 SpriteRenderer:
   m_ObjectHideFlags: 0
