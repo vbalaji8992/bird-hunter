@@ -55,7 +55,7 @@ public class InputControl : MonoBehaviour
     { 
         MouseDownPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (gameControl.arrowsLeft > 0 && gameControl.acceptPlayerInput)
+        if (gameControl.acceptPlayerInput)
             SetMouseDown(true);                     
     }
 
@@ -67,7 +67,7 @@ public class InputControl : MonoBehaviour
             return;
         }
 
-        if (gameControl.arrowsLeft > 0 && gameControl.acceptPlayerInput)
+        if (gameControl.acceptPlayerInput)
             ArcherControl.Instance.CreateArrow();
 
         SetMouseDown(false);

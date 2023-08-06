@@ -24,7 +24,11 @@ public class BirdEnemy : MonoBehaviour
     void Start()
     {
         InitializeObject();
+        InitializePositions();
+    }
 
+    protected virtual void InitializePositions()
+    {
         positions = new List<Vector3>();
         foreach (Transform child in transform)
         {

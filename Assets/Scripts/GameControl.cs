@@ -84,6 +84,11 @@ public class GameControl : MonoBehaviour
         if (!isLevelOver)
             timeLeft -= Time.deltaTime;
 
+        if (!isLevelOver && arrowsLeft != 0)
+            acceptPlayerInput = true;
+        else
+            acceptPlayerInput = false;
+
         bool isTimeOver = timeLeft <= 0;
         bool isNoArrowLeft = arrowsLeft == 0 && arrowsInAir == 0;
         bool isNoEnemyLeft = currentEnemies == 0;
@@ -106,7 +111,6 @@ public class GameControl : MonoBehaviour
     private void EndLevel()
     {
         isLevelOver = true;
-        acceptPlayerInput = false;
         CalculateScore();        
     }
 
