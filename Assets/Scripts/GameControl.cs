@@ -15,8 +15,9 @@ public class GameControl : MonoBehaviour
     public int maxArrows;
     public int totalEnemies;
     public float maxTimeInSeconds;
-    private uint levelNumber;
 
+    private uint levelNumber;
+    private bool isGamePaused;
     private GraphicalElement graphicalElement;
     private SaveGame saveGame;
 
@@ -64,6 +65,7 @@ public class GameControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isGamePaused = false;
         graphicalElement = GraphicalElement.Instance;
         saveGame = SaveGame.Instance;
 
@@ -84,7 +86,7 @@ public class GameControl : MonoBehaviour
         if (!isLevelOver)
             timeLeft -= Time.deltaTime;
 
-        if (!isLevelOver && arrowsLeft != 0)
+        if (!isLevelOver && !isGamePaused && arrowsLeft != 0)
             acceptPlayerInput = true;
         else
             acceptPlayerInput = false;
@@ -117,13 +119,13 @@ public class GameControl : MonoBehaviour
     public void PauseGame()
     {        
         Time.timeScale = 0f;
-        acceptPlayerInput = false;
+        isGamePaused = true;
     }
 
     public void ResumeGame()
     {        
         Time.timeScale = 1f;
-        acceptPlayerInput = true;
+        isGamePaused = false;
     }
 
     public void GoToMainMenu()
