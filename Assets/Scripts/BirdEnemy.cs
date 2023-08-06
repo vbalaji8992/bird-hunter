@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,8 @@ public class BirdEnemy : MonoBehaviour
     protected Rigidbody2D rb2d;
     protected SpriteRenderer spriteRenderer;
 
-    protected bool isDead;
+    public bool IsDead { get; protected set; }
+
     protected bool isOnGround;
     protected Vector2 initialPosition;
     protected Vector2 previousPosition;
@@ -19,6 +21,8 @@ public class BirdEnemy : MonoBehaviour
 
     private List<Vector3> positions;
     private int currentPosIndex;
+
+    protected GameObject deathArrow;
 
     // Start is called before the first frame update
     void Start()
@@ -46,18 +50,26 @@ public class BirdEnemy : MonoBehaviour
 
         initialPosition = transform.position;
         previousPosition = initialPosition;
-        isDead = false;
+        IsDead = false;
         isOnGround = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!isDead)
+        if (!IsDead)
         {
             Move();
             CheckDirectionAndFlipSprite();
-        }               
+        }
+
+        if (isOnGround)
+            HandleDeadBird();
+    }
+
+    protected virtual void HandleDeadBird()
+    {
+
     }
 
     protected virtual void Move()
@@ -91,18 +103,19 @@ public class BirdEnemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Arrow" && !isDead)
+        if (collision.gameObject.tag == "Arrow" && !IsDead)
         {
             GameControl.Instance.currentEnemies -= 1;
-            isDead = true;
+            IsDead = true;
             anim.SetTrigger("BirdDead");
             rb2d.gravityScale = 1.0f;
+            deathArrow = collision.gameObject;
         }
 
-        if (collision.gameObject.tag != "Arrow" && isDead && !isOnGround)
+        if (collision.gameObject.tag != "Arrow" && IsDead && !isOnGround)
         {
             isOnGround = true;
-            GameControl.Instance.enemiesOnGround += 1;            
+            GameControl.Instance.enemiesOnGround += 1;
         }
     }
 }

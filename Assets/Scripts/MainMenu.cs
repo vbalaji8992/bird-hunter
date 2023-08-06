@@ -16,7 +16,8 @@ public class MainMenu : MonoBehaviour
             "BirdTwoMoving",
             "BirdBetweenPlanks",
             "BirdPlankAndMetal",
-            "BirdTwoMetals"
+            "BirdTwoMetals",
+            "FreePlay"
         };
 
     // Start is called before the first frame update

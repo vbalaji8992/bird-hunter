@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BirdBetweenPlanks.unity
     guid: 01300f06faa9f7641836fcc5853a4bb6
+  - enabled: 1
+    path: Assets/Scenes/FreePlay.unity
+    guid: 1bb8c849b32abfb479ce04cd7e374eae
   m_configObjects: {}

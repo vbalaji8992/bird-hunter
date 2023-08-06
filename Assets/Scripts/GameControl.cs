@@ -101,6 +101,13 @@ public class GameControl : MonoBehaviour
 
         if (isLevelOver && (isTimeOver || isNoArrowLeft || allEnemiesOnGround))
             graphicalElement.DisplayScoreBoard();
+
+        SpawnNewEnemy();
+    }
+
+    protected virtual void SpawnNewEnemy()
+    {
+
     }
 
     public void UpdateArrowCountOnFire()
