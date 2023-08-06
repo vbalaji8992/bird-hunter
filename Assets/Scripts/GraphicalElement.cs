@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
-    class GraphicalElement : MonoBehaviour
+    public class GraphicalElement : MonoBehaviour
     {
         public static GraphicalElement Instance { get; private set; }
 
@@ -43,6 +43,7 @@ namespace Assets.Scripts
         public Sprite[] levelScoreImage;
         public TMP_Text levelStatus;
         public TMP_Text levelNumber;
+        public TMP_Text freePlayKills;
 
         public Image hand;
         public float handAnimationTime;
@@ -183,6 +184,13 @@ namespace Assets.Scripts
             {
                 levelStatus.text = "YOU WIN";
             }
+        }
+
+        public void SetArcadeScore(uint score)
+        {
+            Destroy(levelScore.GetComponent<Image>());
+            scoreBoard.transform.Find("NextBtnSB").gameObject.GetComponent<Button>().interactable = false;
+            levelStatus.text = "KILLS \n" + score.ToString();
         }
 
         public void UpdateLastShotStats(float percentagePower, float launchAngle)

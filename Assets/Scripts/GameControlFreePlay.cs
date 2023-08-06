@@ -20,4 +20,18 @@ public class GameControlFreePlay : GameControl
             Instantiate(enemy, spawnPosition, Quaternion.identity);
         }
     }
+
+    public override void CalculateScore()
+    {
+        graphicalElement.freePlayKills.text = FreePlayKills.ToString();
+
+        if(isLevelOver)
+            graphicalElement.SetArcadeScore(FreePlayKills);
+    }
+
+    protected override void SetLevelNumberInUI()
+    {
+        graphicalElement.levelNumber.text = "ARCADE";        
+        CalculateScore();
+    }
 }

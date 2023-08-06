@@ -49,5 +49,11 @@ namespace Assets.Scripts
                 Destroy(deathArrow);
             }            
         }
+
+        protected override void UpdateKillCount()
+        {
+            gameControl.FreePlayKills += 1;
+            gameControl.CalculateScore();
+        }
     }
 }

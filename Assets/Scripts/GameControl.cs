@@ -18,7 +18,7 @@ public class GameControl : MonoBehaviour
 
     private uint levelNumber;
     private bool isGamePaused;
-    private GraphicalElement graphicalElement;
+    protected GraphicalElement graphicalElement;
     private SaveGame saveGame;
 
     [HideInInspector]
@@ -43,6 +43,8 @@ public class GameControl : MonoBehaviour
 
     [HideInInspector]
     public float timeLeft;
+
+    public uint FreePlayKills { get; set; }
 
     void Awake()
     {
@@ -75,9 +77,16 @@ public class GameControl : MonoBehaviour
         currentEnemies = totalEnemies;
         enemiesOnGround = 0;
         arrowsInAir = 0;
+        FreePlayKills = 0;
 
+        SetLevelNumberInUI();        
+    }
+
+    protected virtual void SetLevelNumberInUI()
+    {
         levelNumber = (uint)MainMenu.Levels.IndexOf(SceneManager.GetActiveScene().name);
         graphicalElement.levelNumber.text = "LEVEL " + levelNumber.ToString("00");
+        graphicalElement.freePlayKills.enabled = false;
     }
 
     // Update is called once per frame
@@ -163,7 +172,7 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    void CalculateScore()
+    public virtual void CalculateScore()
     {
         
         float arrowPoints = (float)arrowsLeft / maxArrows;

@@ -16,8 +16,7 @@ public class MainMenu : MonoBehaviour
             "BirdTwoMoving",
             "BirdBetweenPlanks",
             "BirdPlankAndMetal",
-            "BirdTwoMetals",
-            "FreePlay"
+            "BirdTwoMetals"
         };
 
     // Start is called before the first frame update
@@ -30,6 +29,11 @@ public class MainMenu : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void PlayArcade()
+    {
+        LevelButton.LoadLevelAdditive("FreePlay");
     }
 
     public void QuitGame()

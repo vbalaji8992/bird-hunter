@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class BirdEnemy : MonoBehaviour
     private int currentPosIndex;
 
     protected GameObject deathArrow;
+    protected GameControl gameControl;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +54,8 @@ public class BirdEnemy : MonoBehaviour
         previousPosition = initialPosition;
         IsDead = false;
         isOnGround = false;
+
+        gameControl = GameControl.Instance;
     }
 
     // Update is called once per frame
@@ -105,7 +109,7 @@ public class BirdEnemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Arrow" && !IsDead)
         {
-            GameControl.Instance.currentEnemies -= 1;
+            UpdateKillCount();
             IsDead = true;
             anim.SetTrigger("BirdDead");
             rb2d.gravityScale = 1.0f;
@@ -115,7 +119,12 @@ public class BirdEnemy : MonoBehaviour
         if (collision.gameObject.tag != "Arrow" && IsDead && !isOnGround)
         {
             isOnGround = true;
-            GameControl.Instance.enemiesOnGround += 1;
+            gameControl.enemiesOnGround += 1;
         }
+    }
+
+    protected virtual void UpdateKillCount()
+    {
+        gameControl.currentEnemies -= 1;
     }
 }

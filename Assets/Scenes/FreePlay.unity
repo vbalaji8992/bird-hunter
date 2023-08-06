@@ -161,7 +161,7 @@ PrefabInstance:
     - target: {fileID: -3871694798980039271, guid: eb6ec6a532f07c74ba487cba5b5b1c3a,
         type: 3}
       propertyPath: maxTimeInSeconds
-      value: 300
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7316735258068623640, guid: eb6ec6a532f07c74ba487cba5b5b1c3a,
         type: 3}
