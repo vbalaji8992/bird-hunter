@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public TMP_Text highScoreArcade;
+
     public static List<string> Levels { get; private set; } = new List<string>
         {
             "BirdStaticNear",
@@ -21,8 +24,8 @@ public class MainMenu : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-
+    {        
+        highScoreArcade.text = "HIGH SCORE - " + SaveGame.Instance.GetArcadeScore();
     }
 
     // Update is called once per frame

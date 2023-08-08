@@ -34,9 +34,9 @@ public class SaveGame : MonoBehaviour
     }
 
     public void SaveData()
-    {
-        string saveData = JsonUtility.ToJson(CurrentData);        
-        
+    {        
+        string saveData = JsonUtility.ToJson(CurrentData);
+
         File.WriteAllText(saveFileNameWithPath, saveData);
     }
 
@@ -50,13 +50,13 @@ public class SaveGame : MonoBehaviour
         }
         else
         {
-            return new SaveData(true);
+            return new SaveData(true, 0);
         }
     }
 
     private SaveData ValidateData(SaveData data)
     {
-        SaveData validatedData = new SaveData(data.showHand);
+        SaveData validatedData = new SaveData(data.showHand, data.highestScoreArcade);
 
         foreach (var rating in data.levelScores)
         {
@@ -77,7 +77,7 @@ public class SaveGame : MonoBehaviour
     {
         var levelScore = CurrentData.levelScores.FirstOrDefault(item => item.levelNumber == levelNumber);
 
-        if (levelScore != null )
+        if (levelScore != null)
         {
             if (levelScore.highestScore > score)
                 return;
@@ -103,6 +103,17 @@ public class SaveGame : MonoBehaviour
             return 0;
         }
     }
+
+    public uint GetArcadeScore()
+    {
+        return CurrentData.highestScoreArcade;
+    }
+
+    public void UpdateArcadeScore(uint score)
+    {
+        if (score > CurrentData.highestScoreArcade)
+            CurrentData.highestScoreArcade = score;
+    }
 }
 
 [Serializable]
@@ -110,12 +121,14 @@ public class SaveData
 {
     public bool showHand;
     public List<LevelScore> levelScores;
+    public uint highestScoreArcade;
 
-    public SaveData(bool _showHand)
+    public SaveData(bool _showHand, uint _highestScoreArcade)
     {
         showHand = _showHand;
         levelScores = new List<LevelScore>();
-    }    
+        highestScoreArcade = _highestScoreArcade;
+    }
 }
 
 [Serializable]

@@ -19,7 +19,7 @@ public class GameControl : MonoBehaviour
     private uint levelNumber;
     private bool isGamePaused;
     protected GraphicalElement graphicalElement;
-    private SaveGame saveGame;
+    protected SaveGame saveGame;
 
     [HideInInspector]
     public int arrowsLeft;

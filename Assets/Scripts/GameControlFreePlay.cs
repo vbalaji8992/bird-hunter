@@ -24,6 +24,8 @@ public class GameControlFreePlay : GameControl
     public override void CalculateScore()
     {
         graphicalElement.freePlayKills.text = FreePlayKills.ToString();
+        saveGame.UpdateArcadeScore(FreePlayKills);
+        saveGame.SaveData();
 
         if(isLevelOver)
             graphicalElement.SetArcadeScore(FreePlayKills);
