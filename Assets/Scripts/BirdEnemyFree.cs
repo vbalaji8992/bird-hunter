@@ -13,6 +13,8 @@ namespace Assets.Scripts
         private float time = 0.0f;
         private float destroyTime = 0.0f;
 
+        public virtual string Type { get; protected set; } = "Hittable";
+
         protected override void InitializePositions()
         {
             pos1 = GameObject.Find("Limit-1").transform.position;

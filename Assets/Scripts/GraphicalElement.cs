@@ -49,6 +49,9 @@ namespace Assets.Scripts
         public float handAnimationTime;
         private Animator handAnimator;
 
+        public TMP_Text arcadePointDisplay;
+        private Animator pointAnimator;
+
         private GameControl gameControl;
         private SaveGame saveGame;
         private BackgroundMusic backgroundMusic;
@@ -82,6 +85,8 @@ namespace Assets.Scripts
             }
 
             ChangeBgmButton();
+
+            pointAnimator = arcadePointDisplay.GetComponent<Animator>();
         }
 
         void Update()
@@ -280,6 +285,12 @@ namespace Assets.Scripts
                 bgmOffImage.SetActive(true);
             else
                 bgmOffImage.SetActive(false);
+        }
+
+        public void DisplayPoint(int point)
+        {
+            arcadePointDisplay.GetComponent<TMP_Text>().text = point.ToString();
+            pointAnimator.SetTrigger("Display");
         }
     }
 }

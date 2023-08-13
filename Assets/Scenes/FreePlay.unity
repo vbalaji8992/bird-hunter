@@ -163,6 +163,12 @@ PrefabInstance:
       propertyPath: maxTimeInSeconds
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: -3871694798980039271, guid: eb6ec6a532f07c74ba487cba5b5b1c3a,
+        type: 3}
+      propertyPath: enemyRed
+      value: 
+      objectReference: {fileID: 6924028242795653476, guid: 2680c7816e809a7458cb81925cbdd6db,
+        type: 3}
     - target: {fileID: 7316735258068623640, guid: eb6ec6a532f07c74ba487cba5b5b1c3a,
         type: 3}
       propertyPath: m_LocalPosition.x

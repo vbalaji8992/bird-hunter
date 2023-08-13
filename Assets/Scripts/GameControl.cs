@@ -193,4 +193,9 @@ public class GameControl : MonoBehaviour
         saveGame.UpdateLevelScore(levelNumber, score);
         saveGame.SaveData();
     }
+
+    public virtual void DisplayPoint(int point)
+    {
+
+    }
 }
