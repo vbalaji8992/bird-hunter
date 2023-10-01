@@ -37,7 +37,7 @@ public class GameControlFreePlay : GameControl
         saveGame.UpdateArcadeScore(FreePlayKills);
         saveGame.SaveData();
 
-        if(isLevelOver)
+        if(IsLevelOver)
             graphicalElement.SetArcadeScore(FreePlayKills);
     }
 

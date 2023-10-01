@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class BirdEnemy : MonoBehaviour
 {
-    protected const float twoPiRadians = 6.28319f;
-
     protected Animator anim;
     protected Rigidbody2D rb2d;
     protected SpriteRenderer spriteRenderer;
@@ -119,12 +117,12 @@ public class BirdEnemy : MonoBehaviour
         if (collision.gameObject.tag != "Arrow" && IsDead && !isOnGround)
         {
             isOnGround = true;
-            gameControl.enemiesOnGround += 1;
+            gameControl.EnemiesOnGround += 1;
         }
     }
 
     protected virtual void UpdateKillCount()
     {
-        gameControl.currentEnemies -= 1;
+        gameControl.CurrentEnemies -= 1;
     }
 }

@@ -20,38 +20,23 @@ public class GameControl : MonoBehaviour
     private bool isGamePaused;
     protected GraphicalElement graphicalElement;
     protected SaveGame saveGame;
-
-    [HideInInspector]
-    public int arrowsLeft;
-
-    [HideInInspector]
-    public int arrowsInAir;
-
-    [HideInInspector]
-    public int currentEnemies;
-
-    [HideInInspector]
-    public int enemiesOnGround;
-
+    private int arrowsLeft;
     private uint score;
 
-    [HideInInspector]
-    public bool acceptPlayerInput;
-
-    [HideInInspector]
-    public bool isLevelOver;
-
-    [HideInInspector]
-    public float timeLeft;
-
+    public int ArrowsInAir { get; set; }
+    public int CurrentEnemies { get; set; }
+    public int EnemiesOnGround { get; set; }
+    public bool acceptPlayerInput { get; private set; }
+    public bool IsLevelOver { get; private set; }
+    public float TimeLeft { get; private set; }
     public uint FreePlayKills { get; set; }
 
     void Awake()
     {
         Time.timeScale = 1f;
         acceptPlayerInput = true;
-        isLevelOver = false;
-        timeLeft = maxTimeInSeconds;
+        IsLevelOver = false;
+        TimeLeft = maxTimeInSeconds;
 
         if (Instance == null)
         {
@@ -74,9 +59,9 @@ public class GameControl : MonoBehaviour
         arrowsLeft = maxArrows;
         graphicalElement.GenerateArrowCount(arrowsLeft);
         graphicalElement.UpdateArrowCountImage(arrowsLeft);
-        currentEnemies = totalEnemies;
-        enemiesOnGround = 0;
-        arrowsInAir = 0;
+        CurrentEnemies = totalEnemies;
+        EnemiesOnGround = 0;
+        ArrowsInAir = 0;
         FreePlayKills = 0;
 
         SetLevelNumberInUI();        
@@ -92,23 +77,23 @@ public class GameControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isLevelOver)
-            timeLeft -= Time.deltaTime;
+        if (!IsLevelOver)
+            TimeLeft -= Time.deltaTime;
 
-        if (!isLevelOver && !isGamePaused && arrowsLeft != 0)
+        if (!IsLevelOver && !isGamePaused && arrowsLeft != 0)
             acceptPlayerInput = true;
         else
             acceptPlayerInput = false;
 
-        bool isTimeOver = timeLeft <= 0;
-        bool isNoArrowLeft = arrowsLeft == 0 && arrowsInAir == 0;
-        bool isNoEnemyLeft = currentEnemies == 0;
-        bool allEnemiesOnGround = enemiesOnGround == totalEnemies;
+        bool isTimeOver = TimeLeft <= 0;
+        bool isNoArrowLeft = arrowsLeft == 0 && ArrowsInAir == 0;
+        bool isNoEnemyLeft = CurrentEnemies == 0;
+        bool allEnemiesOnGround = EnemiesOnGround == totalEnemies;
 
-        if (!isLevelOver && (isTimeOver || isNoArrowLeft || isNoEnemyLeft))
+        if (!IsLevelOver && (isTimeOver || isNoArrowLeft || isNoEnemyLeft))
             EndLevel();
 
-        if (isLevelOver && (isTimeOver || isNoArrowLeft || allEnemiesOnGround))
+        if (IsLevelOver && (isTimeOver || isNoArrowLeft || allEnemiesOnGround))
             graphicalElement.DisplayScoreBoard();
 
         SpawnNewEnemy();
@@ -123,12 +108,12 @@ public class GameControl : MonoBehaviour
     {
         arrowsLeft -= 1;
         graphicalElement.UpdateArrowCountImage(arrowsLeft);
-        arrowsInAir += 1;
+        ArrowsInAir += 1;
     }
 
     private void EndLevel()
     {
-        isLevelOver = true;
+        IsLevelOver = true;
         CalculateScore();        
     }
 
@@ -176,11 +161,11 @@ public class GameControl : MonoBehaviour
     {
         
         float arrowPoints = (float)arrowsLeft / maxArrows;
-        float timePoints = timeLeft / maxTimeInSeconds;
+        float timePoints = TimeLeft / maxTimeInSeconds;
 
         float totalPoints = (arrowPoints + timePoints) / 2;
 
-        if(currentEnemies == 0)
+        if(CurrentEnemies == 0)
         {
             score = (uint)Math.Ceiling(totalPoints / 0.33);
         }

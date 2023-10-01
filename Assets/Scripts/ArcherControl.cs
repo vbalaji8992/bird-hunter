@@ -17,6 +17,7 @@ public class ArcherControl : MonoBehaviour
 
     public float forceConstant;
     public float maxForce;
+
     private float launchForce;
     private float percentagePower;
     private Vector2 forceVector;
@@ -43,9 +44,10 @@ public class ArcherControl : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {       
+    {
 
-        transform.parent.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 0.05f, Screen.height * 0.5f, 10));
+        Vector3 archerPosition = new Vector3(Screen.width * 0.05f, Screen.height * 0.5f, 10);
+        transform.parent.position = Camera.main.ScreenToWorldPoint(archerPosition);
 
         archerTopPos = archerTop.transform.position;
 

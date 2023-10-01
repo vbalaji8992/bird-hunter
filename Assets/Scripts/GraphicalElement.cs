@@ -91,7 +91,7 @@ namespace Assets.Scripts
 
         void Update()
         {
-            levelTimer.text = TimeSpan.FromSeconds(GameControl.Instance.timeLeft).ToString(@"mm\:ss");
+            levelTimer.text = TimeSpan.FromSeconds(GameControl.Instance.TimeLeft).ToString(@"mm\:ss");
 
             if (handAnimationTime <= 0)
             {
@@ -141,7 +141,9 @@ namespace Assets.Scripts
             powerMeter.text = (percentagePower * 100).ToString("00");
             powerBar.fillAmount = percentagePower;
             powerBar.transform.position = trajectoryPoints[0].transform.position + new Vector3(-1.15f, 1.25f, 0f);
-            powerMeter.transform.position = powerBar.transform.position + new Vector3(powerBar.GetComponent<RectTransform>().rect.width * powerBar.transform.localScale.x * powerBar.fillAmount, 0f, 0f);
+            Vector3 powerMeterRelativePos = 
+                new Vector3(powerBar.GetComponent<RectTransform>().rect.width * powerBar.transform.localScale.x * powerBar.fillAmount, 0f, 0f);
+            powerMeter.transform.position = powerBar.transform.position + powerMeterRelativePos;
 
             angleText.text = launchAngle.ToString("00") + "°";
             angleText.transform.position = trajectoryPoints[3].transform.position + new Vector3(0.75f, 0.75f, 0f);
@@ -156,7 +158,8 @@ namespace Assets.Scripts
 
         Vector2 TrajectoryPointPosition(Vector2 startingPosition, float t)
         {
-            Vector2 position = startingPosition + (ArcherControl.Instance.GetInitialAccelerationVector() * Time.fixedDeltaTime * t) + (0.5f * Physics2D.gravity * t * t);
+            Vector2 initialVelocity = ArcherControl.Instance.GetInitialAccelerationVector() * Time.fixedDeltaTime;
+            Vector2 position = startingPosition + (initialVelocity * t) + (0.5f * Physics2D.gravity * t * t);
             return position;
         }
 

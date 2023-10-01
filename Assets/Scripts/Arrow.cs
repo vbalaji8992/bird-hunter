@@ -58,7 +58,7 @@ public class Arrow : MonoBehaviour
 
     public void DestroyArrow()
     {
-        GameControl.Instance.arrowsInAir -= 1;
+        GameControl.Instance.ArrowsInAir -= 1;
         DestroyComponents();
         islodged = true;
     }
